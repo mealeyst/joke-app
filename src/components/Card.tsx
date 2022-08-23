@@ -56,6 +56,7 @@ export const Card = styled(({className}) => {
   border-radius: ${spacing(10)};
   padding: ${spacing(10)};
   backdrop-filter: blur(10px);
+  border: ${color('primary.900')} solid ${spacing(1)};
   display: flex;
   flex-direction: column;
   background-color: ${color('grey.50', 0.4)};
