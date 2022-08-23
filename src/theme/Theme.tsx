@@ -141,8 +141,6 @@ export type ColorKey<T extends ColorSet = ColorSet> = T extends ColorSet
 
 export type ColorPath = Join<PathsToStringProps<Theme['colors']>, '.'>
 
-export type BreakpointPath = Join<PathsToStringProps<Theme['breakpoints']>, '.'>
-
 declare module 'styled-components' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface,@typescript-eslint/no-unused-vars
   interface DefaultTheme extends Theme {}

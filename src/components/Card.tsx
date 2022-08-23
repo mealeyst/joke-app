@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { color } from '../theme/color';
 import { spacing } from '../theme/spacing';
+import { query } from '../theme/mediaQueries';
 import { Button } from './Button';
 
 interface Joke {
@@ -91,7 +92,10 @@ export const Card = styled(({className}) => {
     margin: ${spacing(6, 0)};
   }
   .joke, .punchline {
-    font-size: ${spacing(18)};
+    font-size: ${spacing(4)};
+    ${query('md')}{
+      font-size: ${spacing(18)};
+    }
     animation: ${fadeTextIn} 0.5s ease-in-out;
   }
 `

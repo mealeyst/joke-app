@@ -1,10 +1,10 @@
 import { StyledProps } from 'styled-components'
-import { get } from 'lodash'
-import { Theme, BreakpointPath } from './Theme'
+import { THEME } from './Theme'
 
-const getBreakpoint = (theme: Theme, brekpointPath: BreakpointPath): string =>
-  get(theme.breakpoints, brekpointPath)
+type Queries = typeof THEME['breakpoints']
 
-export const query = <T extends BreakpointPath>(queryPath: T) => ({
-  theme,
-}: StyledProps<unknown>) => getBreakpoint(theme, queryPath)
+export const query = (queryPath: Queries) => {
+  const mq = THEME.breakpoints[queryPath]
+  console.log(mq)
+  return mq
+}
