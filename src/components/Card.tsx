@@ -22,30 +22,48 @@ const fadeTextIn = keyframes`
 
 export const Card = styled(({className}) => {
   const [joke, setJoke] = useState<Joke | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<Error| null>(null)
   const [showPunchline, setShowPunchline] = useState(false);
   const fetchJoke = async () => {
-    const response = await fetch("https://karljoke.herokuapp.com/jokes/random", {
-      method: 'GET',
-    })
-    const result = await response.json()
-    setJoke(result)
+    try {
+      setShowPunchline(false)
+      setIsLoading(true)
+      const response = await fetch("https://karljoke.herokuapp.com/jokes/random", {
+        method: 'GET',
+      })
+      const result = await response.json()
+      setJoke(result)
+      setIsLoading(false)
+    } catch (err: unknown) {
+      setError(new Error('It appears there is an error with the Joke API!'))
+    }
   }
   useEffect(() => {
     fetchJoke()
   }, [])
   return (
     <div className={className}>
-      <header>
-        <Button onClick={() => fetchJoke()}>Get a New Joke</Button>
-        <a href="https://karljoke.herokuapp.com/" rel="noreferrer" target="_blank">View API docs</a>
-      </header>
-      <div className="joke-region">{joke && <span className="joke">{joke.setup}</span>}</div>
-      <div className="punchline-region">{showPunchline && <span className="punchline">{joke?.punchline}</span>}</div>
-      <footer>
-        <Button onClick={() => setShowPunchline(!showPunchline)}>
-          {showPunchline ? 'Hide Punchline' : 'Show Punchline'}
-        </Button>
-      </footer>
+        {!error &&
+        <>
+          {isLoading && <span className="loading">Loading...</span>}
+          {!isLoading && <>
+            <header>
+              <Button onClick={() => fetchJoke()}>Get a New Joke</Button>
+              <a href="https://karljoke.herokuapp.com/" rel="noreferrer" target="_blank">View API docs</a>
+            </header>
+            <div className="joke-region">{joke && <span className="joke">{joke.setup}</span>}</div>
+            <div className="punchline-region">{showPunchline && <span className="punchline">{joke?.punchline}</span>}</div>
+            <footer>
+              <Button onClick={() => setShowPunchline(!showPunchline)}>
+                {showPunchline ? 'Hide Punchline' : 'Show Punchline'}
+              </Button>
+            </footer>
+          </>
+          }
+        </>
+      }
+      { error && error.toString()}
     </div>
   )
 })`
