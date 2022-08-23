@@ -1,5 +1,6 @@
 {
   "name": "joke-interface",
+  "homepage": "https://mealeyst.github.io/joke-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
