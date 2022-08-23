@@ -174,9 +174,6 @@ export const GlobalStyles = createGlobalStyle`
       align-items: center;
     }
   }
-  body, body label {
-    cursor: url("${process.env.PUBLIC_URL}/cursor.svg"), url("${process.env.PUBLIC_URL}/cursor.png"), default;
-  }
   h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
   }
