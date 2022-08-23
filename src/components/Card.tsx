@@ -70,9 +70,6 @@ export const Card = styled(({className}) => {
     display: flex;
     justify-content: space-between;
     margin: ${spacing(6, 0)};
-    ${Button} {
-      background-color: ${color('indigo.900')}
-    }
   }
   .joke, .punchline {
     font-size: ${spacing(18)};
